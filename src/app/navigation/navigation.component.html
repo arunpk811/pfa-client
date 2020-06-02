@@ -1,0 +1,36 @@
+<mat-toolbar color='primary'>
+    <mat-toolbar-row>
+      <div >
+        <button *ngIf='checkIfUserLoggedIn()' type="button" aria-label="Toggle sidenav" mat-icon-button
+          (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span ><strong>Finance Application</strong></span>
+        <span>
+          <button matTooltip="logout" *ngIf='checkIfUserLoggedIn()' type="button" mat-icon-button routerLink="/" (click)="logout()">
+            <mat-icon >logout</mat-icon>
+          </button>
+        </span>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-sidenav-container class="container">
+    <mat-sidenav #drawer mode="side" closed role="navigation">
+      <mat-nav-list>
+        <a mat-list-item routerLink='/home'>Home</a>
+        <a mat-list-item routerLink='/transactions'>Transactions</a>
+        <a mat-list-item routerLink='/loans'>Loans</a>
+        <a mat-list-item routerLink='/loans/given'>Loans given</a>
+
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div >
+        <div ></div>
+        <div >
+          <router-outlet></router-outlet>
+        </div>
+        <div ></div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

@@ -1,0 +1,12 @@
+<div class='mainDiv'>
+    <form (ngSubmit)='!loginForm.invalid && handleLogin()' #loginForm='ngForm'>
+        <mat-form-field>
+            <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+        </mat-form-field>
+        <button mat-raised-button type='submit' color="primary">Login</button>
+    </form>
+    <mat-error *ngIf='isInvalidLogin'>{{errorMessage}}</mat-error>
+</div>

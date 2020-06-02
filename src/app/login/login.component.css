@@ -1,0 +1,13 @@
+.mat-form-field {
+    width: 200px;
+    flex: 1;
+  }
+  .mainDiv{
+    padding-left: 40%;
+    width: 200px;
+    height: fit-content;
+  }
+  .button{
+    padding: 10px;
+  }
+  
