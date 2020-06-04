@@ -1,23 +1,25 @@
-<table mat-table [dataSource]="dataSource" class="mat-table">
+<h2>Borrower Details</h2>
+<button class="add-button" mat-raised-button (click)='addBorrower()'>ADD</button>
+<mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef> Description </th>
-        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> Amount </th>
-        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+        <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Date </th>
-        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.date | date:'fullDate'}} </mat-cell>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

@@ -1,0 +1,8 @@
+mat-form-field{
+    width: fit-content;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+mat-dialog-content{
+    width: 500px;
+}

@@ -4,13 +4,14 @@ import { ViewTransactionsComponent } from './view-transactions/view-transactions
 import { Routes, RouterModule } from '@angular/router';
 import { RouteGuardService } from 'src/app/services/route-guard.service';
 import { CoreModule } from 'src/app/core/core.module';
+import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 
 
 const todoRoutes: Routes=[
   {path:'', component: ViewTransactionsComponent,canActivate:[RouteGuardService]}
 ]
 @NgModule({
-  declarations: [ViewTransactionsComponent],
+  declarations: [ViewTransactionsComponent, AddTransactionComponent],
   imports: [
     RouterModule.forChild(todoRoutes),
     CommonModule,

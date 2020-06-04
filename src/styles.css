@@ -1,8 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body { height: 100% }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.table {
-    width: 100px;
+h2{
+    padding-left: 0.7em;
 }
+mat-table {
+    width: 98%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+mat-header-cell {
+    background-color: darkgray;
+}
+.addbutton {
+    margin: 1.5em;
+}
+
+

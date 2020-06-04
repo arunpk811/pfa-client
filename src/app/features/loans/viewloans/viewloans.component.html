@@ -1,1 +1,26 @@
-<p>viewloans works!</p>
+<h2>Loan Details</h2>
+<button class="add-button" mat-raised-button (click)='addBorrower()'>ADD</button>
+<mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.date | date:'fullDate'}} </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

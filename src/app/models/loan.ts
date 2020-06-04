@@ -3,4 +3,5 @@ export class Loan{
     name: string
     description: string
     amount: string
+    date: string
 }

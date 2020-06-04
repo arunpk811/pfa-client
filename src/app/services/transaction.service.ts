@@ -11,7 +11,7 @@ export class TransactionService {
   constructor(private httpClient: HttpClient) { }
   
   getTransactions(){
-    return this.httpClient.get<Transaction>(`${environment.baseUrl}/api/transactions`)
+    return this.httpClient.get<Transaction[]>(`${environment.baseUrl}/api/transactions`)
   }
 
   // addTransaction(){

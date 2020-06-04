@@ -13,8 +13,8 @@ export class HttpInterceptorJwtAuthService implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     const token = this.jwtAuthService.getAuthToken();
     const username = this.jwtAuthService.getAuthUser();
-    console.log('Token : ' + token);
-    console.log('User : ' + username);
+    // console.log('Token : ' + token);
+    // console.log('User : ' + username);
     if (token && username) {
       request = request.clone({
         setHeaders: {

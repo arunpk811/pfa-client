@@ -11,7 +11,7 @@ export class LoanService {
   constructor(private httpClient: HttpClient) { }
   
   getLoans(){
-    return this.httpClient.get<Loan>(`${environment.baseUrl}/api/loans`)
+    return this.httpClient.get<Loan[]>(`${environment.baseUrl}/api/loans`)
   }
 
   addLoan(loan: Loan){
