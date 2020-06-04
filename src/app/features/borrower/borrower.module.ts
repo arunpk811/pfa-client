@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ViewloansComponent } from './viewloans/viewloans.component';
+import { ViewBorrowerComponent } from './view-borrower/view-borrower.component';
 import { RouteGuardService } from 'src/app/services/route-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 
 
 const todoRoutes: Routes=[
-  {path:'', component: ViewloansComponent,canActivate:[RouteGuardService]}
+  {path:'', component: ViewBorrowerComponent,canActivate:[RouteGuardService]}
 ]
 @NgModule({
-  declarations: [ ViewloansComponent],
+  declarations: [ViewBorrowerComponent],
   imports: [
     RouterModule.forChild(todoRoutes),
     CommonModule,
@@ -20,4 +20,4 @@ const todoRoutes: Routes=[
     RouterModule
   ]
 })
-export class LoansModule { }
+export class BorrowerModule { }

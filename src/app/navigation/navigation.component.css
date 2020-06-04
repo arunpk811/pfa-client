@@ -1,11 +1,13 @@
 .container {
     height: 100%;
-    /* margin: 10px; */
-  }
+    width: 100%;
+}
 
 .mat-nav-list{
-    width: 200px;
+    padding-left: 1em;
+    padding-right: 1em;
 }
+
 .mat-toolbar{
-  
+  height: 2em;
 }
