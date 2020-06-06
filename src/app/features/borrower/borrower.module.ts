@@ -5,6 +5,8 @@ import { RouteGuardService } from 'src/app/services/route-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 import { AddBorrowerComponent } from './add-borrower/add-borrower.component';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 const todoRoutes: Routes=[
@@ -15,9 +17,10 @@ const todoRoutes: Routes=[
   imports: [
     RouterModule.forChild(todoRoutes),
     CommonModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ],
-  entryComponents:[AddBorrowerComponent],
+  entryComponents:[AddBorrowerComponent, ConfirmDialogComponent],
   exports:[
     RouterModule
   ]

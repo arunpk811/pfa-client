@@ -1,21 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 html, body { height: 100% }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-h2{
-    padding-left: 0.7em;
+mat-sidenav-container {
+    height: 100%;
+    width: 100%;
 }
-mat-table {
+
+mat-toolbar{
+  height: 2em;
+}
+
+.menu:hover{
+    padding-left: 0.2em;
+}
+
+.menu-icon {
+    padding: 0 15px;
+    padding-left: 0.2em;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+.data-table{
     width: 98%;
     padding-left: 1%;
     padding-right: 1%;
 }
-mat-header-cell {
-    background-color: darkgray;
+table {
+    width: 100%;
+    border-radius: 1em;
 }
-.addbutton {
-    margin: 1.5em;
+th {
+    /* background-color: azure; */
 }
+
+.dialog-title{
+    margin-left: 1em;
+}
+
+
+
+
 
 

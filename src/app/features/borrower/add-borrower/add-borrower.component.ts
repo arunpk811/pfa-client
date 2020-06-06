@@ -31,10 +31,10 @@ export class AddBorrowerComponent implements OnInit {
   ngOnInit() {
     var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
     this.form = this.fb.group({
-      name: [(this.borrower.name !== null ? this.borrower.name : ''), [Validators.required]],
-      description: [(this.borrower.description !== null ? this.borrower.description : '')],
-      amount: [(this.borrower.amount !== null ? this.borrower.amount : 0), [Validators.required]],
-      date: [(this.borrower.date !== null ? this.datePipe.transform(this.borrower.date, "yyyy-MM-dd") : new Date), [Validators.required]]
+      name: [(this.borrower.name != null ? this.borrower.name : ''), [Validators.required]],
+      description: [(this.borrower.description != null ? this.borrower.description : '')],
+      amount: [(this.borrower.amount != null ? this.borrower.amount : 0), [Validators.required]],
+      date: [(this.borrower.date != null ? this.datePipe.transform(this.borrower.date, "yyyy-MM-dd") : new Date), [Validators.required]]
     });
   }
 

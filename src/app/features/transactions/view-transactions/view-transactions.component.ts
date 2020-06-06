@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Transaction } from 'src/app/models/transaction';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { TransactionService } from 'src/app/services/transaction.service';
 
 @Component({
@@ -11,9 +11,11 @@ import { TransactionService } from 'src/app/services/transaction.service';
 export class ViewTransactionsComponent implements OnInit {
   public displayedColumns = ['name', 'description', 'amount', 'type'];
   public dataSource = new MatTableDataSource<Transaction>();
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator
     this.transactionService.getTransactions().subscribe(
       res => {
         this.dataSource.data = res

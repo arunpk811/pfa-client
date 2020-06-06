@@ -10,6 +10,7 @@ import { JwtauthenticationService } from '../services/jwtauthentication.service'
 })
 export class NavigationComponent implements OnInit {
   @ViewChild('drawer', { static: false }) sidenav: MatSidenav
+  username: string;
   constructor(
     private jwtAuth: JwtauthenticationService,
     private router: Router
@@ -19,12 +20,18 @@ export class NavigationComponent implements OnInit {
   }
 
   checkIfUserLoggedIn() {
-    return this.jwtAuth.isUserLoggedIn();
+    this.getUsername()
+    return this.jwtAuth.isUserLoggedIn()
+  }
+
+  getUsername(){
+    this.username= this.jwtAuth.getAuthUser()
   }
 
   logout() {
-    this.jwtAuth.logOut();
-    this.sidenav.close();
-    this.router.navigate(['']);
+    this.jwtAuth.logOut()
+    this.sidenav.close()
+    this.username = null
+    this.router.navigate([''])
   }
 }

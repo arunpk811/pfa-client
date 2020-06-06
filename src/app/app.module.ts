@@ -19,7 +19,7 @@ import { MatFormFieldModule } from '@angular/material';
     HomeComponent,
     ErrorComponent,
     LoginComponent,
-    NavigationComponent
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

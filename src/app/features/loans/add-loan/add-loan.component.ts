@@ -30,15 +30,14 @@ export class AddLoanComponent implements OnInit {
   ngOnInit() {
     var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
     this.form = this.fb.group({
-      name: [(this.loan.name !== null ? this.loan.name : ''), [Validators.required]],
-      description: [(this.loan.description !== null ? this.loan.description : '')],
-      amount: [(this.loan.amount !== null ? this.loan.amount : 0), [Validators.required]],
-      date: [(this.loan.date !== null ? this.datePipe.transform(this.loan.date, "yyyy-MM-dd") : new Date), [Validators.required]]
+      name: [(this.loan.name != null ? this.loan.name : ''), [Validators.required]],
+      description: [(this.loan.description != null ? this.loan.description : '')],
+      amount: [(this.loan.amount != null ? this.loan.amount : 0), [Validators.required]],
+      date: [(this.loan.date != null ? this.datePipe.transform(this.loan.date, "yyyy-MM-dd") : new Date), [Validators.required]]
     });
   }
 
   save() {
-    this.loan.id = this.id
     this.loan.name = this.form.get('name').value;
     this.loan.description = this.form.get('description').value;
     this.loan.amount = this.form.get('amount').value;

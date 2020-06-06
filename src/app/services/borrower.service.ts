@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Borrower } from '../models/borrower';
 import { HttpClient } from '@angular/common/http';
+import { StringResponse } from '../models/string-response';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,6 @@ export class BorrowerService {
   }
 
   deleteBorrower(borrowerId: number){
-    return this.httpClient.delete<string>(`${environment.baseUrl}/borrowers/${borrowerId}`)
+    return this.httpClient.delete<StringResponse>(`${environment.baseUrl}/api/borrowers/${borrowerId}`)
   }
 }

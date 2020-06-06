@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RouteGuardService } from 'src/app/services/route-guard.service';
 import { CoreModule } from 'src/app/core/core.module';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 const todoRoutes: Routes=[
@@ -15,7 +16,8 @@ const todoRoutes: Routes=[
   imports: [
     RouterModule.forChild(todoRoutes),
     CommonModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ],
   exports:[
     RouterModule

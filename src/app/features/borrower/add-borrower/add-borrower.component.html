@@ -1,5 +1,4 @@
 <h2 mat-dialog-title>{{title}}</h2>
-
 <mat-dialog-content [formGroup]="form">
     <mat-form-field fxFill>
         <mat-label>Name</mat-label>
@@ -11,7 +10,7 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Amount</mat-label>
-        <input matInput placeholder="Amount" formControlName="amount">
+        <input matInput placeholder="Amount" type="number" formControlName="amount">
     </mat-form-field>
     <mat-form-field>
         <mat-label>Date</mat-label>
