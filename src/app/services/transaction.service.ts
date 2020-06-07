@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Transaction } from '../models/transaction';
 import { environment } from 'src/environments/environment';
+import { StringResponse } from '../models/string-response';
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +15,16 @@ export class TransactionService {
     return this.httpClient.get<Transaction[]>(`${environment.baseUrl}/api/transactions`)
   }
 
-  // addTransaction(){
-  //   return this.httpClient.post<Transaction>(`${environment.baseUrl}/transactions`)
-  // }
+  addTransaction(transaction: Transaction){
+    return this.httpClient.post<Transaction>(`${environment.baseUrl}/api/transactions`, transaction)
+  }
 
-  // updateTransaction(){
-  //   return this.httpClient.get<Transaction>(`${environment.baseUrl}/transactions`)
-  // }
+  updateTransaction(transaction: Transaction){
+    return this.httpClient.put<Transaction>(`${environment.baseUrl}/api/transactions`, transaction)
+  }
 
-  // deleteTransaction(){
-  //   return this.httpClient.get<Transaction>(`${environment.baseUrl}/transactions`)
-  // }
+  deleteTransaction(transactionId: number){
+    return this.httpClient.delete<StringResponse>(`${environment.baseUrl}/api/transactions/${transactionId}`)
+  }
 
 }

@@ -1,8 +1,8 @@
 <mat-toolbar color='primary' style="height: 25px !important; ">
   <mat-toolbar-row>
-    <span class='toolbar-spacer' matTooltip="Menu" matTooltipHideDelay="100">
+    <span class='toolbar-spacer' >
       <button *ngIf='checkIfUserLoggedIn()' type="button" aria-label="Toggle sidenav" mat-icon-button
-        (click)="drawer.toggle()">
+        (click)="drawer.toggle()" matTooltip="Menu" matTooltipHideDelay="100">
         <mat-icon>menu</mat-icon>
       </button>
     </span>

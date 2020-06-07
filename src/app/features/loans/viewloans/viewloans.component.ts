@@ -13,9 +13,9 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
   styleUrls: ['./viewloans.component.css']
 })
 export class ViewloansComponent implements OnInit {
-  public displayedColumns = ['name', 'description', 'amount', 'date', 'update', 'delete'];
+  public displayedColumns = ['name', 'description', 'amount', 'date', 'update'];
   public dataSource = new MatTableDataSource<Loan>();
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   deleteMessage: string;
   constructor(
     private loanService: LoanService,
@@ -27,7 +27,7 @@ export class ViewloansComponent implements OnInit {
     this.dataSource.paginator = this.paginator
   }
 
-  getLoans(){
+  getLoans() {
     this.loanService.getLoans().subscribe(
       res => {
         this.dataSource.data = res
@@ -37,11 +37,13 @@ export class ViewloansComponent implements OnInit {
 
   addLoan() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose=true
+    dialogConfig.disableClose = true
     dialogConfig.data = {
       id: null,
       title: 'Add Loan',
-      loan: new Loan()
+      loan: {
+
+      } as Loan
     };
 
     const dialogRef = this.matDialog.open(AddLoanComponent, dialogConfig);
@@ -57,7 +59,7 @@ export class ViewloansComponent implements OnInit {
 
   editLoan(_loan: Loan) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose=true
+    dialogConfig.disableClose = true
     dialogConfig.data = {
       id: null,
       title: 'Edit Loan',
@@ -75,9 +77,9 @@ export class ViewloansComponent implements OnInit {
     )
   }
 
-  deleteLoan(_loan: Loan){
+  deleteLoan(_loan: Loan) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose=true
+    dialogConfig.disableClose = true
     dialogConfig.data = {
       title: 'Are you sure?',
     };
@@ -87,7 +89,7 @@ export class ViewloansComponent implements OnInit {
       result => {
         if (result) {
           this.loanService.deleteLoan(_loan.id).subscribe(
-            result =>{
+            result => {
               this.deleteMessage = result.data;
               this.getLoans()
             }

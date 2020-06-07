@@ -6,6 +6,7 @@ import { RouteGuardService } from 'src/app/services/route-guard.service';
 import { CoreModule } from 'src/app/core/core.module';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 const todoRoutes: Routes=[
@@ -17,10 +18,12 @@ const todoRoutes: Routes=[
     RouterModule.forChild(todoRoutes),
     CommonModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   exports:[
-    RouterModule
+    RouterModule,
+    CommonModule
   ]
   // entryComponents: [AddTodoDialogComponent]
 })

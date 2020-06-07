@@ -1,7 +1,7 @@
-export class Loan{
-    id: number
+export interface Loan{
+    id?: number
     name: string
-    description: string
+    description?: string
     amount: string
     date: string
 }

@@ -1,8 +1,8 @@
-export class Transaction {
-    id: number
+export interface Transaction {
+    id?: number
     name: string
-    description: string
+    description?: string
     amount: string
     type: string;
-    transactionDate: string
+    transactionDate: Date
 }

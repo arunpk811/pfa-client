@@ -25,18 +25,24 @@ mat-toolbar{
 .toolbar-spacer {
   flex: 1 1 auto;
 }
-.data-table{
+.data-table-div{
     width: 98%;
     padding-left: 1%;
     padding-right: 1%;
+    table-layout: fixed;
 }
 table {
     width: 100%;
     border-radius: 1em;
+    table-layout: fixed;
 }
-th {
-    /* background-color: azure; */
+th, td {
+    overflow: hidden;
+    /* width: 120px; */
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+  
 
 .dialog-title{
     margin-left: 1em;

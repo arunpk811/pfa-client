@@ -13,7 +13,7 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
   styleUrls: ['./view-borrower.component.css']
 })
 export class ViewBorrowerComponent implements OnInit {
-  public displayedColumns = ['name', 'description', 'amount', 'date', 'update', 'delete'];
+  public displayedColumns = ['name', 'description', 'amount', 'date', 'update'];
   public dataSource = new MatTableDataSource<Borrower>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   deleteMessage: string
@@ -40,7 +40,9 @@ export class ViewBorrowerComponent implements OnInit {
     dialogConfig.data = {
         id: null,
         title: 'Add Borrower',
-        borrower: new Borrower()
+        borrower: {
+          
+        } as Borrower
     };
 
     const dialogRef = this.matDialog.open(AddBorrowerComponent, dialogConfig);

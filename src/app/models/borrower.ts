@@ -1,7 +1,7 @@
-export class Borrower {
-    id: number
+export interface Borrower {
+    id?: number
     name: string
-    description: string
+    description?: string
     amount: string
     date: string
 }
