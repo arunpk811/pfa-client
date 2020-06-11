@@ -39,7 +39,6 @@ export class AddBorrowerComponent implements OnInit {
   }
 
   save() {
-    this.borrower.id = this.id
     this.borrower.name = this.form.get('name').value;
     this.borrower.description = this.form.get('description').value;
     this.borrower.amount = this.form.get('amount').value;
