@@ -10,11 +10,11 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./view-transactions.component.css']
 })
 export class ViewTransactionsComponent implements OnInit {
-  public displayedColumns = ['type', 'name', 'description', 'amount', 'transactionDate', 'update'];
+  public displayedColumns = ['type', 'amount', 'update'];
   public dataSource = new MatTableDataSource<Transaction>();
   public inputTransaction: Transaction
   deleteMessage: string
-  transactionType: string 
+  transactionType: string
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(
@@ -23,12 +23,12 @@ export class ViewTransactionsComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.dataSource.paginator = this.paginator
-    this.transactionType='income';
+    this.transactionType = 'income';
     this.getTransactions()
     this.inputTransaction = {
       name: '',
       description: '',
-      amount: '',
+      amount: null,
       type: this.transactionType,
       transactionDate: new Date
     } as Transaction
@@ -59,16 +59,14 @@ export class ViewTransactionsComponent implements OnInit {
     this.inputTransaction = {
       name: '',
       description: '',
-      amount: '',
+      amount: null,
       type: this.transactionType,
       transactionDate: new Date
     } as Transaction
   }
 
   editRow(transaction: Transaction) {
-    console.log(this.transactionType)
     this.transactionType = transaction.type
-    console.log(this.transactionType)
     this.inputTransaction = transaction as Transaction
   }
 
@@ -79,5 +77,9 @@ export class ViewTransactionsComponent implements OnInit {
         this.deleteMessage = result.data;
       }
     )
+  }
+
+  getRowStyle(row: Transaction) {
+    return row.type === 'income' ? 'lightgreen' : 'lightcoral'
   }
 }

@@ -1,9 +1,11 @@
 <h2 mat-dialog-title>{{title}}</h2>
 <mat-dialog-content [formGroup]="form">
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Name" formControlName="name">
-    </mat-form-field>
+    <span>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+    </span>
     <mat-form-field>
         <mat-label>Description</mat-label>
         <input matInput placeholder="Description" formControlName="description">
@@ -20,7 +22,7 @@
     </mat-form-field>
 </mat-dialog-content>
 
-<mat-dialog-actions style="align-content: center;">
+<mat-dialog-actions>
     <div>
         <button mat-raised-button color='primary' (click)="form.valid && save()">Save</button>
         <button mat-stroked-button (click)="close()">Close</button>

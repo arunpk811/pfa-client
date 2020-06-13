@@ -1,31 +1,30 @@
-<div class='data-table-div'>
 <h2>Borrower Details</h2>
 <button mat-raised-button (click)='addBorrower()'>ADD</button>
-<span *ngIf='deleteMessage' class='delete-message'>{{deleteMessage}}</span>
-<table mat-table [dataSource]="dataSource">
+<span *ngIf='deleteMessage'>{{deleteMessage}}</span>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="description">
+    <!-- <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef> Description </th>
         <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef> Amount </th>
         <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="date">
+    <!-- <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> Date </th>
         <td mat-cell *matCellDef="let element"> {{element.date | date:'fullDate'}} </td>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="update">
         <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let element" style="text-align: right;">
+        <td mat-cell *matCellDef="let element">
             <button mat-icon-button color='primary' (click)='editBorrower(element)'>
                 <mat-icon>edit</mat-icon>
             </button>
@@ -38,4 +37,3 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-</div>

@@ -1,32 +1,52 @@
-<mat-toolbar color='primary' style="height: 25px !important; ">
-  <mat-toolbar-row>
-    <span class='toolbar-spacer' >
+<mat-toolbar color='primary'>
+    <mat-toolbar-row>
+        <span>
       <button *ngIf='checkIfUserLoggedIn()' type="button" aria-label="Toggle sidenav" mat-icon-button
         (click)="drawer.toggle()" matTooltip="Menu" matTooltipHideDelay="100">
         <mat-icon>menu</mat-icon>
       </button>
     </span>
-    <span class='toolbar-spacer'><strong>Finance Management Application</strong></span>
-    <span *ngIf='checkIfUserLoggedIn()' matTooltip="Logged in as {{username}}" matTooltipHideDelay="100">
+        <span class='toolbar-spacer'>Finance Management</span>
+        <span *ngIf='checkIfUserLoggedIn()' matTooltip="Logged in as {{username}}" matTooltipHideDelay="100">
       <button mat-button [matMenuTriggerFor]="logoutBtn">
         <mat-icon>person</mat-icon> {{username}}
       </button>
       <mat-menu #logoutBtn="matMenu">
-        <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>Logout</button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>Logout
+        </button>
       </mat-menu>
     </span>
-  </mat-toolbar-row>
+    </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav #drawer mode="side" closed role="navigation">
-    <mat-nav-list>
-      <div class='menu'><a mat-list-item routerLink='/home'><mat-icon class='menu-icon'>home</mat-icon>Home</a></div>
-      <div class='menu'><a mat-list-item routerLink='/transactions'><mat-icon class='menu-icon'>receipt_long</mat-icon>Transactions</a></div>
-      <div class='menu'><a mat-list-item routerLink='/loans'><mat-icon class='menu-icon'>report</mat-icon>Loans</a></div>
-      <div class='menu'><a mat-list-item routerLink='/borrowers'><mat-icon class='menu-icon'>people</mat-icon>Borrowers</a></div>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-        <router-outlet></router-outlet>
-  </mat-sidenav-content>
+    <mat-sidenav #drawer closed role="navigation">
+        <mat-nav-list>
+            <div>
+                <a mat-list-item routerLink='/home'>
+                    <mat-icon>home</mat-icon>Home
+                </a>
+            </div>
+            <div>
+                <a mat-list-item routerLink='/transactions'>
+                    <mat-icon>receipt_long</mat-icon>Transactions
+                </a>
+            </div>
+            <div>
+                <a mat-list-item routerLink='/loans'>
+                    <mat-icon>report</mat-icon>Loans
+                </a>
+            </div>
+            <div>
+                <a mat-list-item routerLink='/borrowers'>
+                    <mat-icon>people</mat-icon>Borrowers
+                </a>
+            </div>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div style="padding-left: 1em; padding-right: 1em; height: 100vh;">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
 </mat-sidenav-container>

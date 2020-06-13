@@ -13,7 +13,7 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
   styleUrls: ['./view-borrower.component.css']
 })
 export class ViewBorrowerComponent implements OnInit {
-  public displayedColumns = ['name', 'description', 'amount', 'date', 'update'];
+  public displayedColumns = ['name', 'amount', 'update'];
   public dataSource = new MatTableDataSource<Borrower>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   deleteMessage: string
