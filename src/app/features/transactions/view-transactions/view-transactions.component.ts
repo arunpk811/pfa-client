@@ -10,11 +10,11 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./view-transactions.component.css']
 })
 export class ViewTransactionsComponent implements OnInit {
-  public displayedColumns = ['type', 'amount', 'update'];
+  public displayedColumns = ['name', 'amount', 'update'];
   public dataSource = new MatTableDataSource<Transaction>();
   public inputTransaction: Transaction
-  deleteMessage: string
   transactionType: string
+  message: string
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(
@@ -32,6 +32,25 @@ export class ViewTransactionsComponent implements OnInit {
       type: this.transactionType,
       transactionDate: new Date
     } as Transaction
+  }
+
+  getTotalIncome() {
+    let income = this.dataSource.data.map(t => {
+      let _income =0 
+      if(t.type=='income')
+        _income += t.amount
+      return _income
+    })
+    return income.reduce((acc, value) => acc + value, 0)
+  }
+  getTotalExpense(){
+    let expense = this.dataSource.data.map(t => {
+      let _expense =0 
+      if(t.type !=='income')
+        _expense += t.amount
+      return _expense
+    })
+    return expense.reduce((acc, value) => acc + value, 0)
   }
 
   getTransactions() {
@@ -53,7 +72,12 @@ export class ViewTransactionsComponent implements OnInit {
     else
       this.transactionService.updateTransaction(this.inputTransaction).subscribe(
         result => {
-          this.dataSource.data.push(result)
+          this.dataSource.data.filter((value) => {
+            if (value.id == result.id) {
+              value = result
+              this.message = value.name + ' updated successfully';
+            }
+          })
         }
       )
     this.inputTransaction = {
@@ -74,12 +98,8 @@ export class ViewTransactionsComponent implements OnInit {
     this.transactionService.deleteTransaction(transaction.id).subscribe(
       result => {
         this.getTransactions();
-        this.deleteMessage = result.data;
+        this.message = transaction.name + ' deleted successfully';
       }
     )
-  }
-
-  getRowStyle(row: Transaction) {
-    return row.type === 'income' ? 'lightgreen' : 'lightcoral'
   }
 }

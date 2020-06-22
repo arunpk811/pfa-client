@@ -26,6 +26,11 @@ export class ViewBorrowerComponent implements OnInit {
     this.getBorrowers()
     this.dataSource.paginator = this.paginator
   }
+
+  getTotal(){
+    return this.dataSource.data.map(t => t.amount).reduce((acc, value)=> acc + value, 0)
+  }
+
   getBorrowers(){
     this.borrowerService.getBorrowers().subscribe(
       res => {
@@ -70,7 +75,11 @@ export class ViewBorrowerComponent implements OnInit {
     dialogRef.afterClosed().pipe(take(1)).subscribe(
       result => {
         if (result) {
-          this.dataSource.data.push(result)
+          this.dataSource.data.filter((value) => {
+            if (value.id == result.id) {
+              value = result
+            }
+          })
         }
       }
     )

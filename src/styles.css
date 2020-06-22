@@ -28,6 +28,12 @@ td {
     /* width: 120px; */
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.total {
+    font-weight: bolder;
+    /* font-family: 'Courier New', Courier, monospace; */
 }
 
 
