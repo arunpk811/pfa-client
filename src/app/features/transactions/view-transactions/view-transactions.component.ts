@@ -70,7 +70,7 @@ export class ViewTransactionsComponent implements OnInit {
         }
       )
     else
-      this.transactionService.updateTransaction(this.inputTransaction).subscribe(
+      this.transactionService.updateTransaction(this.inputTransaction.id, this.inputTransaction).subscribe(
         result => {
           this.dataSource.data.filter((value) => {
             if (value.id == result.id) {

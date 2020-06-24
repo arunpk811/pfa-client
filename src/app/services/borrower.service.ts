@@ -19,11 +19,15 @@ export class BorrowerService {
     return this.httpClient.post<Borrower>(`${environment.baseUrl}/api/borrowers`, borrower)
   }
 
-  updateBorrower(borrower: Borrower){
-    return this.httpClient.put<Borrower>(`${environment.baseUrl}/api/borrowers`, borrower)
+  updateBorrower(borrowerId: number, borrower: Borrower){
+    return this.httpClient.patch<Borrower>(`${environment.baseUrl}/api/borrowers/${borrowerId}`, borrower)
   }
 
   deleteBorrower(borrowerId: number){
     return this.httpClient.delete<StringResponse>(`${environment.baseUrl}/api/borrowers/${borrowerId}`)
+  }
+
+  getTotalAmount(){
+    return this.httpClient.get<number>(`${environment.baseUrl}/api/borrowers/total`)
   }
 }

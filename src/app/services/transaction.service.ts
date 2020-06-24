@@ -19,8 +19,8 @@ export class TransactionService {
     return this.httpClient.post<Transaction>(`${environment.baseUrl}/api/transactions`, transaction)
   }
 
-  updateTransaction(transaction: Transaction){
-    return this.httpClient.put<Transaction>(`${environment.baseUrl}/api/transactions`, transaction)
+  updateTransaction(transactionId: number, transaction: Transaction){
+    return this.httpClient.patch<Transaction>(`${environment.baseUrl}/api/transactions/${transactionId}`, transaction)
   }
 
   deleteTransaction(transactionId: number){

@@ -19,11 +19,15 @@ export class LoanService {
     return this.httpClient.post<Loan>(`${environment.baseUrl}/api/loans`, loan)
   }
 
-  updateLoan(loan: Loan){
-    return this.httpClient.put<Loan>(`${environment.baseUrl}/api/loans`, loan)
+  updateLoan(loanId: number, loan: Loan){
+    return this.httpClient.patch<Loan>(`${environment.baseUrl}/api/loans/${loanId}`, loan)
   }
 
   deleteLoan(loanId: number){
     return this.httpClient.delete<StringResponse>(`${environment.baseUrl}/api/loans/${loanId}`)
+  }
+
+  getTotalDebt(){
+    return this.httpClient.get<number>(`${environment.baseUrl}/api/loans/total`)
   }
 }

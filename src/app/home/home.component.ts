@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoanService } from '../services/loan.service';
+import { BorrowerService } from '../services/borrower.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  totalLoanAmount: number
+  totalGivenAmount: number
+  constructor(private loanService: LoanService,
+    private borrowerService: BorrowerService) { }
 
   ngOnInit() {
+    this.loanService.getTotalDebt().subscribe(
+      response =>{
+        this.totalLoanAmount = response;
+      }
+    )
+    this.borrowerService.getTotalAmount().subscribe(
+      response =>{
+        this.totalGivenAmount = response;
+      }
+    )
   }
 
 }
