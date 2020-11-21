@@ -6,17 +6,26 @@ import { DatePipe } from '@angular/common';
 import { AddBorrowerComponent } from '../add-borrower/add-borrower.component';
 import { take } from 'rxjs/operators';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-view-borrower',
   templateUrl: './view-borrower.component.html',
-  styleUrls: ['./view-borrower.component.css']
+  styleUrls: ['./view-borrower.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class ViewBorrowerComponent implements OnInit {
-  public displayedColumns = ['name', 'amount', 'update'];
+  public displayedColumns = ['name',  'update'];
   public dataSource = new MatTableDataSource<Borrower>();
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   deleteMessage: string
+  expandedElement: Borrower|null;
   constructor(
     private borrowerService: BorrowerService,
     private matDialog: MatDialog,
@@ -105,6 +114,10 @@ export class ViewBorrowerComponent implements OnInit {
         }
       }
     )
+  }
+
+  showTransactions(_borrower: Borrower){
+    console.log(_borrower)
   }
 
 }

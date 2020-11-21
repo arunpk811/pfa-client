@@ -16,11 +16,10 @@
         <mat-label>Date</mat-label>
         <input matInput [matDatepicker]="date" placeholder="Date" formControlName="date">
         <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
-        <mat-datepicker #date></mat-datepicker>
+        <mat-datepicker #date></mat-datepicker> 
     </mat-form-field>
 </mat-dialog-content>
-
 <mat-dialog-actions>
-    <button class="mat-raised-button" (click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary" (click)="form.valid && save()">Save</button>
+    <button mat-raised-button color='primary' (click)="form.valid && save()">Save</button>
+    <button mat-stroked-button (click)="close()">Close</button>
 </mat-dialog-actions>
