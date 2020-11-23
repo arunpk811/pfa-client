@@ -7,20 +7,21 @@ import { CoreModule } from 'src/app/core/core.module';
 import { AddBorrowerComponent } from './add-borrower/add-borrower.component';
 import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
 import { SharedModule } from '../shared/shared.module';
+import { ViewReturnsDialogComponent } from './view-returns-dialog/view-returns-dialog.component';
 
 
 const todoRoutes: Routes=[
   {path:'', component: ViewBorrowerComponent,canActivate:[RouteGuardService]}
 ]
 @NgModule({
-  declarations: [ViewBorrowerComponent, AddBorrowerComponent],
+  declarations: [ViewBorrowerComponent, AddBorrowerComponent, ViewReturnsDialogComponent ],
   imports: [
     RouterModule.forChild(todoRoutes),
     CommonModule,
     CoreModule,
     SharedModule
   ],
-  entryComponents:[AddBorrowerComponent, ConfirmDialogComponent],
+  entryComponents:[AddBorrowerComponent, ConfirmDialogComponent, ViewReturnsDialogComponent],
   exports:[
     RouterModule
   ]

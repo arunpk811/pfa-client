@@ -30,4 +30,8 @@ export class BorrowerService {
   getTotalAmount(){
     return this.httpClient.get<number>(`${environment.baseUrl}/api/borrowers/total`)
   }
+
+  getLoanReturnsByBorrower(borrowerId: number){
+    return this.httpClient.get<any>(`${environment.baseUrl}/api/borrowers/${borrowerId}/loanreturns`)
+  }
 }

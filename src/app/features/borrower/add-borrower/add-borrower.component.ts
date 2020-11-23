@@ -36,6 +36,9 @@ export class AddBorrowerComponent implements OnInit {
       amount: [(this.borrower.amount != null ? this.borrower.amount : 0), [Validators.required]],
       date: [(this.borrower.date != null ? this.datePipe.transform(this.borrower.date, "yyyy-MM-dd") : new Date), [Validators.required]]
     });
+    if(this.borrower.id!==0 && this.borrower.id !==undefined && this.borrower.id !==null){
+      this.form.get('amount').disable();
+    }
   }
 
   save() {
