@@ -20,7 +20,7 @@ export class ViewReturnsDialogComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private borrowerService: BorrowerService,
-    private dialogRef: MatDialogRef<ViewReturnsDialogComponent>,
+    public dialogRef: MatDialogRef<ViewReturnsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data,
     private datePipe: DatePipe
   ) {
