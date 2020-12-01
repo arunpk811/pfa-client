@@ -36,7 +36,7 @@
     <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef> Amount </th>
         <td mat-cell *matCellDef="let element"><label [ngClass]="{'income': element.type == 'income', 'expense': element.type != 'income'}"> {{element.amount|currency:'₹'}}</label> </td>
-        <td mat-footer-cell *matFooterCellDef ngClass='total'> <label style="color: green;"> Income : {{getTotalIncome() | currency:'₹'}}</label> <label style="color: red;"> Expense : {{getTotalExpense() | currency:'₹'}} </label><label style="color: blue;"> Balance : {{getTotalIncome - getTotalExpense() | currency:'₹'}} </label></td>
+        <td mat-footer-cell *matFooterCellDef ngClass='total'> <label style="color: green;"> Income : {{getTotalIncome() | currency:'₹'}}</label> <label style="color: red;"> Expense : {{getTotalExpense() | currency:'₹'}} </label><label style="color: blue;"> Balance : {{getBalance() | currency:'₹'}} </label></td>
     </ng-container>
     <ng-container matColumnDef="update">
         <th mat-header-cell *matHeaderCellDef> </th>
