@@ -52,6 +52,18 @@ export class ViewTransactionsComponent implements OnInit {
     })
     return expense.reduce((acc, value) => acc + value, 0)
   }
+  
+  getBalance(){
+    let balance = this.dataSource.data.map(t => {
+      let _balance =0 
+      if(t.type =='income')
+        _balance += t.amount
+      if(t.type !=='income')
+        _balance -= t.amount
+      return _balance
+    })
+    return balance.reduce((acc, value) => acc + value, 0)
+  }
 
   getTransactions() {
     this.transactionService.getTransactions().subscribe(
