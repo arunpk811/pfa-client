@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 
+
 export const AUTH_USER = 'authUser';
 export const TOKEN = 'token';
 
@@ -14,6 +15,8 @@ export class JwtauthenticationService {
 
   executeAuthService(username, password) {
     console.log(environment.baseUrl);
+    let sha1 = require('sha1')
+    password = sha1(password)
     return this.httpClient.post<any>(`${environment.baseUrl}/authenticate`, { username, password }).pipe(
       map(
         data => {

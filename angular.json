@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "pfa-client"
+  "defaultProject": "pfa-client",
+  "cli": {
+    "analytics": false
+  }
 }

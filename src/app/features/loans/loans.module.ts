@@ -9,13 +9,13 @@ import { SharedModule } from '../shared/shared.module';
 import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
 
 
-const todoRoutes: Routes=[
+const loanRoutes: Routes=[
   {path:'', component: ViewloansComponent,canActivate:[RouteGuardService]}
 ]
 @NgModule({
   declarations: [ ViewloansComponent, AddLoanComponent],
   imports: [
-    RouterModule.forChild(todoRoutes),
+    RouterModule.forChild(loanRoutes),
     CommonModule,
     CoreModule,
     SharedModule

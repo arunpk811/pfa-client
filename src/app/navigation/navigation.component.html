@@ -1,52 +1,60 @@
-<mat-toolbar color='primary'>
-    <mat-toolbar-row>
-        <span>
-      <button *ngIf='checkIfUserLoggedIn()' type="button" aria-label="Toggle sidenav" mat-icon-button
-        (click)="drawer.toggle()" matTooltip="Menu" matTooltipHideDelay="100">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </span>
-        <span class='toolbar-spacer'>Finance Management</span>
-        <span *ngIf='checkIfUserLoggedIn()' matTooltip="Logged in as {{username}}" matTooltipHideDelay="100">
-      <button mat-button [matMenuTriggerFor]="logoutBtn">
-        <mat-icon>person</mat-icon> {{username}}
-      </button>
-      <mat-menu #logoutBtn="matMenu">
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>logout</mat-icon>Logout
-        </button>
-      </mat-menu>
-    </span>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-sidenav-container>
-    <mat-sidenav #drawer closed role="navigation">
-        <mat-nav-list>
-            <div>
-                <a mat-list-item routerLink='/home'>
-                    <mat-icon>home</mat-icon>Home
-                </a>
+<div fxLayout='column'>
+    <mat-toolbar color='primary' class='tool-bar' fxFlexAlign='center'>
+        <mat-toolbar-row>
+            <span>
+                <button *ngIf='checkIfUserLoggedIn()' type="button" aria-label="Toggle sidenav" mat-icon-button
+                    (click)="drawer.toggle()" matTooltip="Menu" matTooltipHideDelay="100">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </span>
+            <span class='toolbar-spacer'>Money manager</span>
+            <span *ngIf='checkIfUserLoggedIn()' matTooltip="Logged in as {{username}}" matTooltipHideDelay="100">
+                <button mat-button [matMenuTriggerFor]="logoutBtn">
+                    <mat-icon>person</mat-icon> {{username}}
+                </button>
+                <mat-menu #logoutBtn="matMenu">
+                    <button mat-menu-item (click)="logout()">
+                        <mat-icon>logout</mat-icon>Logout
+                    </button>
+                </mat-menu>
+            </span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-sidenav-container class='tool-bar' fxFlexAlign='center'>
+        <mat-sidenav #drawer closed role="navigation">
+            <mat-nav-list>
+                <div>
+                    <a mat-list-item routerLink='/home'>
+                        <mat-icon>home</mat-icon>
+                        <label>Home</label>
+                    </a>
+                </div>
+                <div>
+                    <a mat-list-item routerLink='/accounts'>
+                        <mat-icon>account_balance</mat-icon><label>Bank Accounts</label>
+                    </a>
+                </div>
+                <div>
+                    <a mat-list-item routerLink='/transactions'>
+                        <mat-icon>receipt_long</mat-icon><label>Transactions</label>
+                    </a>
+                </div>
+                <div>
+                    <a mat-list-item routerLink='/loans'>
+                        <mat-icon>report</mat-icon><label>Loans</label>
+                    </a>
+                </div>
+                <div>
+                    <a mat-list-item routerLink='/borrowers'>
+                        <mat-icon>people</mat-icon><label>Borrowers</label>
+                    </a>
+                </div>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <div class="main">
+                <router-outlet></router-outlet>
             </div>
-            <div>
-                <a mat-list-item routerLink='/transactions'>
-                    <mat-icon>receipt_long</mat-icon>Transactions
-                </a>
-            </div>
-            <div>
-                <a mat-list-item routerLink='/loans'>
-                    <mat-icon>report</mat-icon>Loans
-                </a>
-            </div>
-            <div>
-                <a mat-list-item routerLink='/borrowers'>
-                    <mat-icon>people</mat-icon>Borrowers
-                </a>
-            </div>
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <div style="padding-left: 1em; padding-right: 1em; height: 100vh;">
-            <router-outlet></router-outlet>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

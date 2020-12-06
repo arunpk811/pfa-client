@@ -1,26 +1,45 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Transaction } from 'src/app/models/transaction';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table'
 import { TransactionService } from 'src/app/services/transaction.service';
 import { DatePipe } from '@angular/common';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MatSort } from '@angular/material/sort';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view-transactions',
   templateUrl: './view-transactions.component.html',
-  styleUrls: ['./view-transactions.component.css']
+  styleUrls: ['./view-transactions.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ]
 })
 export class ViewTransactionsComponent implements OnInit {
-  public displayedColumns = ['name', 'amount', 'update'];
+  public displayedColumns = ['transactionDate', 'amount'];
   public dataSource = new MatTableDataSource<Transaction>();
   public inputTransaction: Transaction
-  transactionType: string
-  message: string
+  public transactionType: string
+  public message: string
+  public expandedElement: Transaction | null;
+  public btnName:string
+  @ViewChild(MatSort) sort: MatSort;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(
     private transactionService: TransactionService,
     private datePipe: DatePipe,
-  ) { }
+    private _snackBar: MatSnackBar,
+  ) { 
+    this.btnName = "ADD"
+  }
   ngOnInit() {
     this.dataSource.paginator = this.paginator
     this.transactionType = 'income';
@@ -36,29 +55,29 @@ export class ViewTransactionsComponent implements OnInit {
 
   getTotalIncome() {
     let income = this.dataSource.data.map(t => {
-      let _income =0 
-      if(t.type=='income')
+      let _income = 0
+      if (t.type == 'income')
         _income += t.amount
       return _income
     })
     return income.reduce((acc, value) => acc + value, 0)
   }
-  getTotalExpense(){
+  getTotalExpense() {
     let expense = this.dataSource.data.map(t => {
-      let _expense =0 
-      if(t.type !=='income')
+      let _expense = 0
+      if (t.type !== 'income')
         _expense += t.amount
       return _expense
     })
     return expense.reduce((acc, value) => acc + value, 0)
   }
-  
-  getBalance(){
+
+  getBalance() {
     let balance = this.dataSource.data.map(t => {
-      let _balance =0 
-      if(t.type =='income')
+      let _balance = 0
+      if (t.type == 'income')
         _balance += t.amount
-      if(t.type !=='income')
+      if (t.type !== 'income')
         _balance -= t.amount
       return _balance
     })
@@ -87,7 +106,8 @@ export class ViewTransactionsComponent implements OnInit {
           this.dataSource.data.filter((value) => {
             if (value.id == result.id) {
               value = result
-              this.message = value.name + ' updated successfully';
+              this.openSnackBar(value.name + ' updated successfully')
+              this.btnName="ADD"
             }
           })
         }
@@ -102,16 +122,42 @@ export class ViewTransactionsComponent implements OnInit {
   }
 
   editRow(transaction: Transaction) {
+    this.btnName = 'UPDATE'
     this.transactionType = transaction.type
     this.inputTransaction = transaction as Transaction
+  }
+
+  reset(){
+    this.inputTransaction = {
+      id:null,
+      name: '',
+      description: '',
+      amount: null,
+      type: this.transactionType,
+      transactionDate: new Date
+    } as Transaction
+    this.btnName="ADD"
   }
 
   deleteRow(transaction: Transaction) {
     this.transactionService.deleteTransaction(transaction.id).subscribe(
       result => {
         this.getTransactions();
-        this.message = transaction.name + ' deleted successfully';
+        this.openSnackBar("Transaction has been deleted successfully")
+        this.btnName="ADD"
       }
     )
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "OK", {
+      duration: 2500,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition
+    });
   }
 }

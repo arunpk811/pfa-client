@@ -1,56 +1,110 @@
-<h2>Transaction Details</h2>
-<form (ngSubmit)='!inputForm.invalid && save()' #inputForm='ngForm'>
-    <mat-button-toggle-group required [(ngModel)]='transactionType' name="type" aria-label="Expense Type" #type>
-        <mat-button-toggle value="income">Income</mat-button-toggle>
-        <mat-button-toggle value="expense">Expense</mat-button-toggle>
-    </mat-button-toggle-group>
-    <span style="color: red;" *ngIf='transactionType == ""'><small>Please select a
-            type</small></span>
-    <mat-form-field style="width: 100%;">
-        <mat-label>Name</mat-label>
-        <input required matInput type='text' [(ngModel)]='inputTransaction.name' name='name' placeholder="Name">
-    </mat-form-field>
-    <mat-form-field style="width: 100%;">
-        <mat-label>Description</mat-label>
-        <input matInput type='text' [(ngModel)]='inputTransaction.description' name='description' placeholder="Description">
-    </mat-form-field>
-    <mat-form-field style="width: 100%;">
-        <mat-label>Amount</mat-label>
-        <input required matInput type='number' [(ngModel)]='inputTransaction.amount' name='amount' placeholder="Amount">
-    </mat-form-field>
-    <mat-form-field style="width: 100%;">
-        <mat-label>Date</mat-label>
-        <input matInput [matDatepicker]="date" placeholder="Date" name='transactionDate' [(ngModel)]='inputTransaction.transactionDate'>
-        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
-        <mat-datepicker #date></mat-datepicker>
-    </mat-form-field>
-    <div><button mat-raised-button type='submit' [disabled]='transactionType == ""' color="primary">ADD</button></div>
-</form>
-<div><label *ngIf="message">{{message}}</label></div>
-<table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element">{{element.name}} </td>
-        <td mat-footer-cell *matFooterCellDef ngClass='total'> Total </td>
-    </ng-container>
-    <ng-container matColumnDef="amount">
-        <th mat-header-cell *matHeaderCellDef> Amount </th>
-        <td mat-cell *matCellDef="let element"><label [ngClass]="{'income': element.type == 'income', 'expense': element.type != 'income'}"> {{element.amount|currency:'₹'}}</label> </td>
-        <td mat-footer-cell *matFooterCellDef ngClass='total'> <label style="color: green;"> Income : {{getTotalIncome() | currency:'₹'}}</label> <label style="color: red;"> Expense : {{getTotalExpense() | currency:'₹'}} </label><label style="color: blue;"> Balance : {{getBalance() | currency:'₹'}} </label></td>
-    </ng-container>
-    <ng-container matColumnDef="update">
-        <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let element">
-            <button mat-icon-button color='primary' (click)='editRow(element)'>
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color='warn' (click)='deleteRow(element)'>
-                <mat-icon>delete</mat-icon>
-            </button></td>
-        <td mat-footer-cell *matFooterCellDef ngClass='total' style="color: red;"> </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<div fxLayout="column">
+    <label fxFlexAlign='center' class="title">Transactions</label>
+    <div style="border-radius: 5px;">
+        <form (ngSubmit)='!inputForm.invalid && save()' #inputForm='ngForm' fxLayout='column'>
+            <mat-button-toggle-group required [(ngModel)]='transactionType' name="type" aria-label="Expense Type"
+                fxLayout='row' fxFlexAlign='center' #type>
+                <mat-button-toggle value="income">Income</mat-button-toggle>
+                <mat-button-toggle value="expense">Expense</mat-button-toggle>
+            </mat-button-toggle-group>
+            <span style="color: red; " *ngIf='transactionType == ""'><small>Please select a
+                    type</small></span>
+            <mat-form-field fxLayout='column' fxFlexAlign='center' style="width: 100%;margin-top: 5px;"
+                appearance="fill">
+                <mat-label>Name</mat-label>
+                <input required matInput type='text' [(ngModel)]='inputTransaction.name' name='name' placeholder="Name">
+            </mat-form-field>
+            <mat-form-field fxLayout='column' fxFlexAlign='center' style="width: 100%;" appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput type='text' [(ngModel)]='inputTransaction.description' name='description'
+                    placeholder="Description">
+            </mat-form-field>
+            <mat-form-field fxLayout='column' fxFlexAlign='center' style="width: 100%;" appearance="fill">
+                <mat-label>Amount</mat-label>
+                <input required matInput type='number' [(ngModel)]='inputTransaction.amount' name='amount'
+                    placeholder="Amount">
+            </mat-form-field>
+            <mat-form-field fxLayout='column' fxFlexAlign='center' style="width: 100%;" appearance="fill">
+                <mat-label>Date</mat-label>
+                <input matInput [matDatepicker]="date" placeholder="Date" name='transactionDate'
+                    [(ngModel)]='inputTransaction.transactionDate'>
+                <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+                <mat-datepicker #date></mat-datepicker>
+            </mat-form-field>
+            <div fxLayout='row' style="justify-content: space-between; padding: 10px;"><button mat-raised-button
+                    type='submit' [disabled]='transactionType == ""'>{{btnName}}</button>
+                <button mat-raised-button type='button' (click)="reset()"
+                    [disabled]='transactionType == ""'>RESET</button>
+            </div>
+        </form>
+    </div>
+    <table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8"
+        style="margin-top: 10px;">
+        <ng-container matColumnDef="transactionDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let element">{{element.transactionDate | date :"dd/MM/yyyy"}} </td>
+            <td mat-footer-cell *matFooterCellDef ngClass='total'> Total </td>
+        </ng-container>
+        <ng-container matColumnDef="amount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+            <td mat-cell *matCellDef="let element"><label
+                    [ngClass]="{'income': element.type == 'income', 'expense': element.type != 'income'}">
+                    {{element.amount|currency:'₹'}}</label> </td>
+            <td mat-footer-cell *matFooterCellDef ngClass='total'>
+                <div style="width: 100%;"><label style="color: green;">{{getTotalIncome() | currency:'₹'}}</label>
+                </div>
+                <div><label style="color: #FF1744;">{{getTotalExpense() | currency:'₹'}} </label></div>
+                <div><label style="color: blue;">{{getBalance() | currency:'₹'}} </label></div>
+            </td>
+        </ng-container>
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let row" [attr.colspan]="2">
+                <div class="element-detail" [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'">
+                    <div style="padding: 0.3em;">
+                        <table>
+                            <tr style="height: fit-content;">
+                                <td>Title</td>
+                                <td>
+                                    <label>:{{row.name}}</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Amount</td>
+                                <td>
+                                    <label>:{{row.amount | currency:'₹'}}</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td>
+                                    <label>:{{row.description}}</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Date</td>
+                                <td style="text-overflow: ellipsis;">
+                                    <label>:{{row.transactionDate | date :"dd/MMM/yyyy"}}</label>
+                                </td>
+                            </tr>
+                        </table>
+                        <div fxLayout=row style="justify-content: space-between; padding: 5px">
+                            <button mat-stroked-button color='accent' (click)='editRow(row)'>
+                                Edit
+                            </button>
+                            <button mat-stroked-button color='warn' (click)='deleteRow(row)'>
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.expanded-row]="expandedElement === row"
+            (click)="expandedElement = expandedElement === row ? null : row"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

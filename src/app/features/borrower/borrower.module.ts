@@ -10,13 +10,13 @@ import { SharedModule } from '../shared/shared.module';
 import { ViewReturnsDialogComponent } from './view-returns-dialog/view-returns-dialog.component';
 
 
-const todoRoutes: Routes=[
+const borrowerRoutes: Routes=[
   {path:'', component: ViewBorrowerComponent,canActivate:[RouteGuardService]}
 ]
 @NgModule({
   declarations: [ViewBorrowerComponent, AddBorrowerComponent, ViewReturnsDialogComponent ],
   imports: [
-    RouterModule.forChild(todoRoutes),
+    RouterModule.forChild(borrowerRoutes),
     CommonModule,
     CoreModule,
     SharedModule

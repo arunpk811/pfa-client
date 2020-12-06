@@ -27,6 +27,11 @@ const routes: Routes = [
     loadChildren: () => import('./features/borrower/borrower.module').then(m => m.BorrowerModule),
     canActivate: [RouteGuardService]
   },
+  {
+    path: 'accounts',
+    loadChildren: () => import('./features/accounts/accounts.module').then(m => m.AccountsModule),
+    canActivate: [RouteGuardService]
+  },
   {path : '**' , component : ErrorComponent}
 ];
 

@@ -8,13 +8,13 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 
 
-const todoRoutes: Routes=[
+const transactionRoutes: Routes=[
   {path:'', component: ViewTransactionsComponent,canActivate:[RouteGuardService]}
 ]
 @NgModule({
   declarations: [ViewTransactionsComponent],
   imports: [
-    RouterModule.forChild(todoRoutes),
+    RouterModule.forChild(transactionRoutes),
     CommonModule,
     CoreModule,
     SharedModule,

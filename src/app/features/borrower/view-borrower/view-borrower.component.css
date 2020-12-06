@@ -1,24 +1,24 @@
 .add-button {
-    margin: 1.5em;
+  margin: 1.5em;
 }
 
 tr.detail-row {
-    height: 0;
-  }
-  
-  tr.element-row:not(.expanded-row):hover {
-    background: whitesmoke;
-  }
-  
-  tr.element-row:not(.expanded-row):active {
-    background: #efefef;
-  }
-  
-  .element-row td {
-    border-bottom-width: 0;
-  }
-  
-  .element-detail {
-    overflow: hidden;
-    display: flex;
-  }
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: #efefef;
+}
+
+.element-row td {
+  border-bottom-width: 0;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
+}

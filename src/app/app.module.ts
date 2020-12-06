@@ -11,7 +11,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { CoreModule } from './core/core.module'
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatFormFieldModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [

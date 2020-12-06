@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Loan } from 'src/app/models/loan';
-import { MatTableDataSource, MatDialogConfig, MatDialog, MatPaginator } from '@angular/material';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table'
+import { MatPaginator } from '@angular/material/paginator'
 import { LoanService } from 'src/app/services/loan.service';
 import { take } from 'rxjs/operators';
 import { AddLoanComponent } from '../add-loan/add-loan.component';
@@ -27,8 +29,8 @@ export class ViewloansComponent implements OnInit {
     this.dataSource.paginator = this.paginator
   }
 
-  getTotal(){
-    return this.dataSource.data.map(t => t.amount).reduce((acc, value)=> acc + value, 0)
+  getTotal() {
+    return this.dataSource.data.map(t => t.amount).reduce((acc, value) => acc + value, 0)
   }
 
   getLoans() {
