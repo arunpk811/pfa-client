@@ -14,6 +14,9 @@ export class AccountService {
   getAccounts() {
     return this.httpClient.get<Account[]>(`${environment.baseUrl}/api/accounts`)
   }
+  getActiveAccounts() {
+    return this.httpClient.get<Account[]>(`${environment.baseUrl}/api/accounts/active`)
+  }
   addAccount(account: Account) {
     return this.httpClient.post<Account>(`${environment.baseUrl}/api/accounts`, account)
   }

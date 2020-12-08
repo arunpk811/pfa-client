@@ -1,40 +1,48 @@
 <div fxLayout="column">
     <label fxFlexAlign='center' class="title">Transactions</label>
     <div style="border-radius: 5px;">
-        <form (ngSubmit)='!inputForm.invalid && save()' #inputForm='ngForm' fxLayout='column'>
-            <mat-button-toggle-group required [(ngModel)]='transactionType' name="type" aria-label="Expense Type"
-                fxLayout='row' fxFlexAlign='center' #type>
+        <form [formGroup]="form" fxLayout='column'>
+            <mat-button-toggle-group formControlName="type" aria-label="Expense Type" fxLayout='row'
+                fxFlexAlign='center' #type>
                 <mat-button-toggle value="income">Income</mat-button-toggle>
                 <mat-button-toggle value="expense">Expense</mat-button-toggle>
             </mat-button-toggle-group>
-            <span style="color: red; " *ngIf='transactionType == ""'><small>Please select a
-                    type</small></span>
-            <mat-form-field fxLayout='column' fxFlexAlign='center' style="width: 100%;margin-top: 5px;"
-                appearance="fill">
-                <mat-label>Name</mat-label>
-                <input required matInput type='text' [(ngModel)]='inputTransaction.name' name='name' placeholder="Name">
+            <mat-error fxFlexAlign='center' *ngIf="form.controls['type'].invalid">Please select a type</mat-error>
+            <mat-form-field appearance="outline">
+                <mat-label>Account</mat-label>
+                <mat-select formControlName="account">
+                    <mat-option *ngFor="let account of accounts" [value]="account">
+                        {{account.bank + "[" +account.accountNumber+"]"}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.controls['account'].invalid">Please select an account</mat-error>
             </mat-form-field>
-            <mat-form-field fxLayout='column' fxFlexAlign='center' style="width: 100%;" appearance="fill">
-                <mat-label>Description</mat-label>
-                <input matInput type='text' [(ngModel)]='inputTransaction.description' name='description'
-                    placeholder="Description">
-            </mat-form-field>
-            <mat-form-field fxLayout='column' fxFlexAlign='center' style="width: 100%;" appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Amount</mat-label>
-                <input required matInput type='number' [(ngModel)]='inputTransaction.amount' name='amount'
-                    placeholder="Amount">
+                <input matInput type='number' formControlName="amount" placeholder="Amount">
+                <mat-error *ngIf="form.controls['amount'].invalid">Please enter valid amount</mat-error>
             </mat-form-field>
-            <mat-form-field fxLayout='column' fxFlexAlign='center' style="width: 100%;" appearance="fill">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput type='text' formControlName="name" placeholder="Name">
+                <mat-error *ngIf="form.controls['name'].invalid">Please enter a title</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <input matInput type='text' formControlName="description" placeholder="Description">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Date</mat-label>
-                <input matInput [matDatepicker]="date" placeholder="Date" name='transactionDate'
-                    [(ngModel)]='inputTransaction.transactionDate'>
-                <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
-                <mat-datepicker #date></mat-datepicker>
+                <input matInput [matDatepicker]="date" placeholder="Date" formControlName="transactionDate">
+                <mat-datepicker-toggle matSuffix [for]="date">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #date [disabled]=false></mat-datepicker>
+                <mat-error *ngIf="form.controls['transactionDate'].invalid">Please pick a date</mat-error>
             </mat-form-field>
             <div fxLayout='row' style="justify-content: space-between; padding: 10px;"><button mat-raised-button
-                    type='submit' [disabled]='transactionType == ""'>{{btnName}}</button>
-                <button mat-raised-button type='button' (click)="reset()"
-                    [disabled]='transactionType == ""'>RESET</button>
+                    type='button' [disabled]='!form.valid' (click)='form.valid && save()'>{{btnName}}</button>
+                <button mat-raised-button type='reset'>RESET</button>
             </div>
         </form>
     </div>
@@ -76,6 +84,18 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Account</td>
+                                <td>
+                                    <label>:{{row.account.bank}}</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Account Number</td>
+                                <td>
+                                    <label>:{{row.account.accountNumber}}</label>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Description</td>
                                 <td>
                                     <label>:{{row.description}}</label>
@@ -88,11 +108,11 @@
                                 </td>
                             </tr>
                         </table>
-                        <div fxLayout=row style="justify-content: space-between; padding: 5px">
-                            <button mat-stroked-button color='accent' (click)='editRow(row)'>
+                        <div fxLayout=column style="justify-content: space-between; padding: 5px">
+                            <!-- <button mat-stroked-button color='accent' (click)='editRow(row)'>
                                 Edit
-                            </button>
-                            <button mat-stroked-button color='warn' (click)='deleteRow(row)'>
+                            </button> -->
+                            <button mat-stroked-button color='warn' fxFlexAlign='end' (click)='deleteRow(row)'>
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </div>

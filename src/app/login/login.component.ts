@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
         }
       );
     } else {
-      console.log("The form is NOT valid");
       this.formSubmitted = false;
     }
   }

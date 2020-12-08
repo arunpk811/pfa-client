@@ -7,6 +7,9 @@ import { DatePipe } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Account } from 'src/app/models/accounts';
+import { AccountService } from 'src/app/services/account.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-view-transactions',
@@ -23,34 +26,47 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 export class ViewTransactionsComponent implements OnInit {
   public displayedColumns = ['transactionDate', 'amount'];
   public dataSource = new MatTableDataSource<Transaction>();
-  public inputTransaction: Transaction
-  public transactionType: string
-  public message: string
   public expandedElement: Transaction | null;
-  public btnName:string
+  public btnName: string
+  public transaction: Transaction
+  form: FormGroup;
+  public accounts: Account[]
   @ViewChild(MatSort) sort: MatSort;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(
+    private fb: FormBuilder,
     private transactionService: TransactionService,
+    private accountService: AccountService,
     private datePipe: DatePipe,
     private _snackBar: MatSnackBar,
-  ) { 
+  ) {
     this.btnName = "ADD"
   }
   ngOnInit() {
     this.dataSource.paginator = this.paginator
-    this.transactionType = 'income';
+    var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
+    this.getActiveAccounts()
+    this.transaction = {} as Transaction
+    this.form = this.fb.group({
+      name: ['', [Validators.required]],
+      description: [''],
+      amount: [0, [Validators.required]],
+      type: ['income', [Validators.required]],
+      account: [null, [Validators.required]],
+      transactionDate: [new Date, [Validators.required]]
+    });
+    this.form.get('transactionDate').disable()
     this.getTransactions()
-    this.inputTransaction = {
-      name: '',
-      description: '',
-      amount: null,
-      type: this.transactionType,
-      transactionDate: new Date
-    } as Transaction
+
+  }
+
+  getActiveAccounts() {
+    this.accountService.getActiveAccounts().subscribe(resp => {
+      this.accounts = resp
+    })
   }
 
   getTotalIncome() {
@@ -93,50 +109,42 @@ export class ViewTransactionsComponent implements OnInit {
   }
 
   save() {
-    this.inputTransaction.type = this.transactionType
-    if (this.inputTransaction.id == null || this.dataSource.data.length == 0)
-      this.transactionService.addTransaction(this.inputTransaction).subscribe(
+    this.transaction.name = this.form.get('name').value;
+    this.transaction.description = this.form.get('description').value;
+    this.transaction.amount = this.form.get('amount').value;
+    this.transaction.transactionDate = this.datePipe.transform(this.form.get('transactionDate').value, "yyyy-MM-dd");
+    this.transaction.type = this.form.get('type').value;
+    this.transaction.account = this.form.get('account').value;
+
+    if (this.transaction.id == null)
+      this.transactionService.addTransaction(this.transaction).subscribe(
         result => {
           this.dataSource.data = [result, ...this.dataSource.data]
+          this.form.reset()
         }
       )
     else
-      this.transactionService.updateTransaction(this.inputTransaction.id, this.inputTransaction).subscribe(
+      this.transactionService.updateTransaction(this.transaction.id, this.transaction).subscribe(
         result => {
           this.dataSource.data.filter((value) => {
             if (value.id == result.id) {
               value = result
               this.openSnackBar(value.name + ' updated successfully')
-              this.btnName="ADD"
+              this.form.get('amount').enable()
+              this.form.reset()
+              this.btnName = "ADD"
             }
           })
         }
       )
-    this.inputTransaction = {
-      name: '',
-      description: '',
-      amount: null,
-      type: this.transactionType,
-      transactionDate: new Date
-    } as Transaction
   }
 
   editRow(transaction: Transaction) {
     this.btnName = 'UPDATE'
-    this.transactionType = transaction.type
-    this.inputTransaction = transaction as Transaction
-  }
-
-  reset(){
-    this.inputTransaction = {
-      id:null,
-      name: '',
-      description: '',
-      amount: null,
-      type: this.transactionType,
-      transactionDate: new Date
-    } as Transaction
-    this.btnName="ADD"
+    this.transaction = transaction
+    this.form.reset(this.transaction)
+    this.form.get('account')
+    this.form.get('amount').disable()
   }
 
   deleteRow(transaction: Transaction) {
@@ -144,7 +152,7 @@ export class ViewTransactionsComponent implements OnInit {
       result => {
         this.getTransactions();
         this.openSnackBar("Transaction has been deleted successfully")
-        this.btnName="ADD"
+        this.btnName = "ADD"
       }
     )
   }
@@ -160,4 +168,9 @@ export class ViewTransactionsComponent implements OnInit {
       verticalPosition: this.verticalPosition
     });
   }
+
+  // compareObjects(acc1: Account, acc2: Account): boolean {
+  //   if(acc2 == null) return false
+  //   return acc1.id == acc2.id
+  // }
 }

@@ -1,6 +1,6 @@
 <div fxLayout='column'>
     <mat-dialog-content fxLayout='column' [formGroup]="form">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
             <mat-label>Bank</mat-label>
             <mat-select formControlName="bank">
               <mat-option *ngFor="let bank of banks" [value]="bank.bankCode">
@@ -8,11 +8,11 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        <mat-form-field appearance='fill'>
+        <mat-form-field appearance='outline'>
             <mat-label>Account Number</mat-label>
-            <input matInput placeholder="Account Number" formControlName="accNumber">
+            <input matInput placeholder="Account Number" type="number" formControlName="accNumber">
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
             <mat-label>Account type</mat-label>
             <mat-select formControlName="type">
               <mat-option *ngFor="let type of accountTypes" [value]="type">
@@ -20,14 +20,14 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance='fill'>
+          <mat-form-field appearance='outline'>
             <mat-label>Account Balance</mat-label>
             <input matInput placeholder="Account balance" formControlName="balance">
         </mat-form-field>
         <label style="margin-bottom: 10px;">Is account active? </label>
         <mat-radio-group aria-label="Is Active" formControlName="isActive">
-          <mat-radio-button value="true">Yes</mat-radio-button>
-          <mat-radio-button style="margin-left: 10px;" value="false">No</mat-radio-button>
+          <mat-radio-button value=true>Yes</mat-radio-button>
+          <mat-radio-button style="margin-left: 10px;" value=false>No</mat-radio-button>
         </mat-radio-group>
     </mat-dialog-content>
     

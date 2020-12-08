@@ -4,5 +4,5 @@ export interface Account {
     bank: string
     balance: number
     type: string
-    isActive: boolean
+    isActive: number
 }

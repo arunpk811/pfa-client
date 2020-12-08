@@ -2,11 +2,11 @@
     <mat-dialog-content [formGroup]="form" fxLayout='column'>
         <mat-card *ngIf="isAdd" fxLayout='column'>
             <mat-card-content fxLayout='column'>
-                <mat-form-field appearance=fill>
+                <mat-form-field appearance=outline>
                     <mat-label>Amount</mat-label>
                     <input matInput placeholder="Amount" type="number" #amount formControlName="amount">
                 </mat-form-field>
-                <mat-form-field appearance=fill>
+                <mat-form-field appearance=outline>
                     <mat-label>Date</mat-label>
                     <input matInput [matDatepicker]="date" placeholder="Date" formControlName="date">
                     <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>

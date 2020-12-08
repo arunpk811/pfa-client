@@ -36,7 +36,7 @@ export class AddAccountComponent implements OnInit {
       bank: [(this.account.bank != null ? this.account.bank : ''), [Validators.required]],
       balance: [(this.account.balance != null ? this.account.balance : 0), [Validators.required]],
       type: [(this.account.type != null ? this.account.type : ''), [Validators.required]],
-      isActive: [(this.account.isActive != null ? this.account.isActive : false), [Validators.required]],
+      isActive: [(this.account.isActive != null ? this.account.isActive==1?"true":"false" : "false"), [Validators.required]],
     });
   }
   save() {
@@ -45,7 +45,6 @@ export class AddAccountComponent implements OnInit {
     this.account.balance = this.form.get('balance').value;
     this.account.type = this.form.get('type').value;
     this.account.isActive = this.form.get('isActive').value;
-    console.log(this.account)
     if (this.account.id == null)
       this.accountService.addAccount(this.account).subscribe(
         response => {

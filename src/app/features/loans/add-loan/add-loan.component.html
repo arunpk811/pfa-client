@@ -1,19 +1,19 @@
 <mat-dialog-content [formGroup]="form">
     <span>
-        <mat-form-field fxLayout="column" appearance=fill>
+        <mat-form-field fxLayout="column" appearance=outline>
             <mat-label>Name</mat-label>
             <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
     </span>
-    <mat-form-field fxLayout="column" appearance=fill>
+    <mat-form-field fxLayout="column" appearance=outline>
         <mat-label>Description</mat-label>
         <input matInput placeholder="Description" formControlName="description">
     </mat-form-field>
-    <mat-form-field fxLayout="column" appearance=fill>
+    <mat-form-field fxLayout="column" appearance=outline>
         <mat-label>Amount</mat-label>
         <input matInput placeholder="Amount" type="number" formControlName="amount">
     </mat-form-field>
-    <mat-form-field fxLayout="column" appearance=fill>
+    <mat-form-field fxLayout="column" appearance=outline>
         <mat-label>Date</mat-label>
         <input matInput [matDatepicker]="date" placeholder="Date" formControlName="date">
         <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
