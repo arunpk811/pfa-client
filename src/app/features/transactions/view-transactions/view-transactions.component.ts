@@ -58,7 +58,6 @@ export class ViewTransactionsComponent implements OnInit {
       account: [null, [Validators.required]],
       transactionDate: [new Date, [Validators.required]]
     });
-    this.form.get('transactionDate').disable()
     this.getTransactions()
 
   }
