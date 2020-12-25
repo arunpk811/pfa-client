@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table'
 import { TransactionService } from 'src/app/services/transaction.service';
 import { DatePipe } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Account } from 'src/app/models/accounts';
 import { AccountService } from 'src/app/services/account.service';
@@ -24,7 +24,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   ]
 })
 export class ViewTransactionsComponent implements OnInit {
-  public displayedColumns = ['transactionDate', 'amount'];
+  public displayedColumns = ['bank','transactionDate', 'amount'];
   public dataSource = new MatTableDataSource<Transaction>();
   public expandedElement: Transaction | null;
   public btnName: string
@@ -34,6 +34,7 @@ export class ViewTransactionsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  sortedData: Transaction[];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(
@@ -47,6 +48,12 @@ export class ViewTransactionsComponent implements OnInit {
   }
   ngOnInit() {
     this.dataSource.paginator = this.paginator
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch(property) {
+        case 'bank': return item.account.bank;
+        default: return item[property];
+      }
+    };
     var ddMMyyyy = this.datePipe.transform(new Date(), "dd-MM-yyyy");
     this.getActiveAccounts()
     this.transaction = {} as Transaction
@@ -172,4 +179,5 @@ export class ViewTransactionsComponent implements OnInit {
   //   if(acc2 == null) return false
   //   return acc1.id == acc2.id
   // }
+
 }

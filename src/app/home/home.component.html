@@ -1,29 +1,31 @@
-<div fxLayout='column'><label fxFlexAlign='center' class="title">Dashboard</label>
-    <mat-card fxLayout='column' fxFlexAlign=center>
-        <mat-card-title fxFlexAlign=center>Bank Balance</mat-card-title>
-        <mat-card-content fxFlexAlign=center>
-            <h1><strong>{{totalBankBalance | currency:'₹ '}}</strong></h1>
-        </mat-card-content>
-        <mat-card-actions fxFlexAlign=center>
-            <button mat-stroked-button color='primary' routerLink='/accounts'>GOTO ACCOUNTS</button>
-        </mat-card-actions>
-    </mat-card>
-    <mat-card fxLayout='column' fxFlexAlign=center>
-        <mat-card-title fxFlexAlign=center>Loans</mat-card-title>
-        <mat-card-content fxFlexAlign=center>
-            <h1><strong>{{totalLoanAmount | currency:'₹ '}}</strong></h1>
-        </mat-card-content>
-        <mat-card-actions fxFlexAlign=center>
-            <button mat-stroked-button color='primary' routerLink='/loans'>GOTO LOANS</button>
-        </mat-card-actions>
-    </mat-card>
-    <mat-card fxLayout='column' fxFlexAlign=center>
-        <mat-card-title fxFlexAlign=center>Given</mat-card-title>
-        <mat-card-content fxFlexAlign=center>
-            <h1><strong>{{totalGivenAmount | currency:'₹ '}}</strong></h1>
-        </mat-card-content>
-        <mat-card-actions fxFlexAlign=center>
-            <button mat-stroked-button color='primary' routerLink='/borrowers'>GOTO BORROWERS</button>
-        </mat-card-actions>
-    </mat-card>
+<div fxLayout='column'>
+    <div style="max-width: fit-content;" fxLayout='column' fxFlexAlign='center'><label fxFlexAlign='center' class="title">Dashboard</label>
+        <mat-card fxLayout='column' fxFlexAlign=center>
+            <mat-card-title fxFlexAlign=center>Bank Balance</mat-card-title>
+            <mat-card-content fxFlexAlign=center>
+                <h1><strong>{{totalBankBalance | currency:'₹ '}}</strong></h1>
+            </mat-card-content>
+            <mat-card-actions fxFlexAlign=center>
+                <button mat-stroked-button color='primary' routerLink='/accounts'>GOTO ACCOUNTS</button>
+            </mat-card-actions>
+        </mat-card>
+        <mat-card fxLayout='column' fxFlexAlign=center>
+            <mat-card-title fxFlexAlign=center>Loans</mat-card-title>
+            <mat-card-content fxFlexAlign=center>
+                <h1><strong>{{totalLoanAmount | currency:'₹ '}}</strong></h1>
+            </mat-card-content>
+            <mat-card-actions fxFlexAlign=center>
+                <button mat-stroked-button color='primary' routerLink='/loans'>GOTO LOANS</button>
+            </mat-card-actions>
+        </mat-card>
+        <mat-card fxLayout='column' fxFlexAlign=center>
+            <mat-card-title fxFlexAlign=center>Given</mat-card-title>
+            <mat-card-content fxFlexAlign=center>
+                <h1><strong>{{totalGivenAmount | currency:'₹ '}}</strong></h1>
+            </mat-card-content>
+            <mat-card-actions fxFlexAlign=center>
+                <button mat-stroked-button color='primary' routerLink='/borrowers'>GOTO BORROWERS</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>
