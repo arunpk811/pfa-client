@@ -1,5 +1,4 @@
 <div fxLayout="column">
-    <label fxFlexAlign='center' class="title">Transactions</label>
     <div style="border-radius: 5px;">
         <form [formGroup]="form" fxLayout='column'>
             <mat-button-toggle-group formControlName="type" aria-label="Expense Type" fxLayout='row'
@@ -35,9 +34,8 @@
                 <mat-label>Date</mat-label>
                 <input matInput [matDatepicker]="date" placeholder="Date" formControlName="transactionDate">
                 <mat-datepicker-toggle matSuffix [for]="date">
-                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                 </mat-datepicker-toggle>
-                <mat-datepicker #date [disabled]=false></mat-datepicker>
+                <mat-datepicker #date></mat-datepicker>
                 <mat-error *ngIf="form.controls['transactionDate'].invalid">Please pick a date</mat-error>
             </mat-form-field>
             <div fxLayout='row' style="justify-content: space-between; padding: 10px;"><button mat-raised-button
@@ -51,24 +49,21 @@
         <ng-container matColumnDef="bank">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Bank </th>
             <td mat-cell *matCellDef="let element">{{element.account.bank}} </td>
-            <td mat-footer-cell *matFooterCellDef ngClass='total'><div style="width: 100%;"><label style="color: green;">{{getTotalIncome() | currency:'₹'}}</label>
+            <td mat-footer-cell *matFooterCellDef ngClass='total'><div style="width: 100%;"><label style="color: green;">{{getTotalIncome() | currency:'INR'}}</label>
             </div> </td>
         </ng-container>
         <ng-container matColumnDef="transactionDate">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
             <td mat-cell *matCellDef="let element">{{element.transactionDate | date :"MMM dd"}} </td>
-            <td mat-footer-cell *matFooterCellDef ngClass='total'> <div><label style="color: #FF1744;">{{getTotalExpense() | currency:'₹'}} </label></div> </td>
+            <td mat-footer-cell *matFooterCellDef ngClass='total'> <div><label style="color: #FF1744;">{{getTotalExpense() | currency:'INR'}} </label></div> </td>
         </ng-container>
         <ng-container matColumnDef="amount">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
             <td mat-cell *matCellDef="let element"><label
                     [ngClass]="{'income': element.type == 'income', 'expense': element.type != 'income'}">
-                    {{element.amount|currency:'₹'}}</label> </td>
+                    {{element.amount|currency:'INR'}}</label> </td>
             <td mat-footer-cell *matFooterCellDef ngClass='total'>
-                <!-- <div style="width: 100%;"><label style="color: green;">{{getTotalIncome() | currency:'₹'}}</label>
-                </div> -->
-                <!-- <div><label style="color: #FF1744;">{{getTotalExpense() | currency:'₹'}} </label></div> -->
-                <div><label style="color: blue;">{{getBalance() | currency:'₹'}} </label></div>
+                <div><label style="color: blue;">{{getBalance() | currency:'INR'}} </label></div>
             </td>
         </ng-container>
         <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
@@ -76,8 +71,8 @@
             <td mat-cell *matCellDef="let row" [attr.colspan]="3">
                 <div class="element-detail" [@detailExpand]="row == expandedElement ? 'expanded' : 'collapsed'">
                     <div style="padding: 0.3em;">
-                        <table>
-                            <tr style="height: fit-content;">
+                        <table style="width: 100%;">
+                            <tr>
                                 <td>Title</td>
                                 <td>
                                     <label>:{{row.name}}</label>
@@ -86,7 +81,7 @@
                             <tr>
                                 <td>Amount</td>
                                 <td>
-                                    <label>:{{row.amount | currency:'₹'}}</label>
+                                    <label>:{{row.amount | currency:'INR'}}</label>
                                 </td>
                             </tr>
                             <tr>
@@ -115,9 +110,6 @@
                             </tr>
                         </table>
                         <div fxLayout=column style="justify-content: space-between; padding: 5px">
-                            <!-- <button mat-stroked-button color='accent' (click)='editRow(row)'>
-                                Edit
-                            </button> -->
                             <button mat-stroked-button color='warn' fxFlexAlign='end' (click)='deleteRow(row)'>
                                 <mat-icon>delete</mat-icon>
                             </button>

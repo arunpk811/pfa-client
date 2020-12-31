@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+import 'hammerjs';
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -7,14 +7,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs/operators';
 import { Account } from 'src/app/models/accounts';
 import { AccountService } from 'src/app/services/account.service';
-import { AddBorrowerComponent } from '../../borrower/add-borrower/add-borrower.component';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { AddAccountComponent } from '../add-account/add-account.component';
 
 @Component({
   selector: 'app-view-accounts',
   templateUrl: './view-accounts.component.html',
-  styleUrls: ['./view-accounts.component.css'],
+  styleUrls: ['./view-accounts.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),

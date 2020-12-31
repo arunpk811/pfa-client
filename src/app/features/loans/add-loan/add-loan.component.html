@@ -1,29 +1,26 @@
-<mat-dialog-content [formGroup]="form">
-    <span>
+<div fxLayout='column'>
+    <mat-dialog-content [formGroup]="form">
+            <mat-form-field fxLayout="column" appearance=outline>
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name">
+            </mat-form-field>
         <mat-form-field fxLayout="column" appearance=outline>
-            <mat-label>Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Description" formControlName="description">
         </mat-form-field>
-    </span>
-    <mat-form-field fxLayout="column" appearance=outline>
-        <mat-label>Description</mat-label>
-        <input matInput placeholder="Description" formControlName="description">
-    </mat-form-field>
-    <mat-form-field fxLayout="column" appearance=outline>
-        <mat-label>Amount</mat-label>
-        <input matInput placeholder="Amount" type="number" formControlName="amount">
-    </mat-form-field>
-    <mat-form-field fxLayout="column" appearance=outline>
-        <mat-label>Date</mat-label>
-        <input matInput [matDatepicker]="date" placeholder="Date" formControlName="date">
-        <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
-        <mat-datepicker #date></mat-datepicker>
-    </mat-form-field>
-</mat-dialog-content>
-
-<mat-dialog-actions>
-    <div>
-        <button mat-raised-button color='primary' (click)="form.valid && save()">Save</button>
-        <button mat-stroked-button (click)="close()">Close</button>
-    </div>
-</mat-dialog-actions>
+        <mat-form-field fxLayout="column" appearance=outline>
+            <mat-label>Amount</mat-label>
+            <input matInput placeholder="Amount" type="number" formControlName="amount">
+        </mat-form-field>
+        <mat-form-field fxLayout="column" appearance=outline>
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="date" placeholder="Date" formControlName="date">
+            <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+            <mat-datepicker #date></mat-datepicker>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions fxFlexAlign='center'>
+            <button mat-raised-button color='primary' (click)="form.valid && save()">Save</button>
+            <button mat-stroked-button (click)="close()">Close</button>
+    </mat-dialog-actions>
+</div>

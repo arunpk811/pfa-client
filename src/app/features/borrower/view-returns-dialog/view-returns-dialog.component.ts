@@ -10,7 +10,7 @@ import { BorrowerService } from 'src/app/services/borrower.service';
 @Component({
   selector: 'app-view-returns-dialog',
   templateUrl: './view-returns-dialog.component.html',
-  styleUrls: ['./view-returns-dialog.component.css']
+  styleUrls: ['./view-returns-dialog.component.scss']
 })
 export class ViewReturnsDialogComponent implements OnInit {
   @ViewChild(MatInput, { static: true }) amount: MatInput;
@@ -20,7 +20,7 @@ export class ViewReturnsDialogComponent implements OnInit {
   public isAdd: boolean=false;
   public isHistory: boolean;
   public displayedColumns = [
-    'amount', 'date', 'delete'];
+    'amount', 'date'];
   public dataSource = new MatTableDataSource<LoanReturns>();
   constructor(
     private fb: FormBuilder,

@@ -7,48 +7,27 @@
                     <mat-icon>menu</mat-icon>
                 </button>
             </span>
-            <span class='toolbar-spacer'>Money manager</span>
+            <span ></span>
+            <label class='toolbar-spacer'>Money manager</label>
             <span *ngIf='checkIfUserLoggedIn()' matTooltip="Logged in as {{username}}" matTooltipHideDelay="100">
                 <button mat-button [matMenuTriggerFor]="logoutBtn">
-                    <mat-icon>person</mat-icon> {{username}}
+                    <mat-icon>person</mat-icon>
                 </button>
                 <mat-menu #logoutBtn="matMenu">
-                    <button mat-menu-item (click)="logout()">
-                        <mat-icon>logout</mat-icon>Logout
-                    </button>
+                    <button mat-menu-item>{{username}}</button>
+                    <button mat-menu-item (click)="logout()">Sign out</button>
                 </mat-menu>
             </span>
         </mat-toolbar-row>
     </mat-toolbar>
     <mat-sidenav-container class='tool-bar' fxFlexAlign='center'>
         <mat-sidenav #drawer closed role="navigation">
-            <mat-nav-list>
-                <div>
-                    <a mat-list-item routerLink='/home'>
-                        <mat-icon>home</mat-icon>
-                        <label>Home</label>
-                    </a>
-                </div>
-                <div>
-                    <a mat-list-item routerLink='/accounts'>
-                        <mat-icon>account_balance</mat-icon><label>Bank Accounts</label>
-                    </a>
-                </div>
-                <div>
-                    <a mat-list-item routerLink='/transactions'>
-                        <mat-icon>receipt_long</mat-icon><label>Transactions</label>
-                    </a>
-                </div>
-                <div>
-                    <a mat-list-item routerLink='/loans'>
-                        <mat-icon>report</mat-icon><label>Loans</label>
-                    </a>
-                </div>
-                <div>
-                    <a mat-list-item routerLink='/borrowers'>
-                        <mat-icon>people</mat-icon><label>Borrowers</label>
-                    </a>
-                </div>
+            <mat-nav-list #menus>
+                <mat-list-item [routerLinkActive]="['is-active']" routerLink='/home' class='menu'>Dashboard</mat-list-item>
+                <mat-list-item [routerLinkActive]="['is-active']" routerLink='/accounts' class='menu'>Bank Accounts</mat-list-item>
+                <mat-list-item [routerLinkActive]="['is-active']" routerLink='/transactions' class='menu'>Transactions</mat-list-item>
+                <mat-list-item [routerLinkActive]="['is-active']" routerLink='/loans' class='menu'>Loans</mat-list-item>
+                <mat-list-item [routerLinkActive]="['is-active']" routerLink='/borrowers' class='menu'>Borrowers</mat-list-item>
             </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content>

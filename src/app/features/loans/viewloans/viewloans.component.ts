@@ -12,7 +12,7 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
 @Component({
   selector: 'app-viewloans',
   templateUrl: './viewloans.component.html',
-  styleUrls: ['./viewloans.component.css']
+  styleUrls: ['./viewloans.component.scss']
 })
 export class ViewloansComponent implements OnInit {
   public displayedColumns = ['name', 'amount', 'update'];

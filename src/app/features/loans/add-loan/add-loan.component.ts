@@ -8,7 +8,7 @@ import { Loan } from 'src/app/models/loan';
 @Component({
   selector: 'app-add-loan',
   templateUrl: './add-loan.component.html',
-  styleUrls: ['./add-loan.component.css']
+  styleUrls: ['./add-loan.component.scss']
 })
 export class AddLoanComponent implements OnInit {
   form: FormGroup;
