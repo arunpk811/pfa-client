@@ -1,6 +1,8 @@
 <div fxLayout='column'>
-    <label fxFlexAlign='center' class="title">Borrowers</label>
-    <button fxFlexAlign='end' color='primary' mat-raised-button (click)='addBorrower()'>ADD</button>
+    <div fxLayout=row style="justify-content: space-between;">
+        <div class="title">Borrowers</div>
+        <button fxFlexAlign='end' color='primary' mat-raised-button (click)='addBorrower()'>ADD</button>
+    </div>
     <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8" style="margin-top: 10px;">
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
@@ -17,7 +19,7 @@
                     <mat-icon>delete</mat-icon>
                 </button>
             </td> 
-            <td mat-footer-cell *matFooterCellDef ngClass='total'> {{getTotal() | currency:'₹'}}</td>
+            <td mat-footer-cell *matFooterCellDef ngClass='total'> {{getTotal() | currency:'INR'}}</td>
         </ng-container>
         <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
         <ng-container matColumnDef="expandedDetail">
@@ -28,13 +30,13 @@
                             <tr style="height: fit-content;">
                                 <td>Loan amount</td>
                                 <td>
-                                    <label>:{{row.amount | currency:'₹ '}}</label>
+                                    <label>:{{row.amount | currency:'INR'}}</label>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Balance amount</td>
                                 <td>
-                                    <label>:{{row.balance | currency:'₹ '}}</label>
+                                    <label>:{{row.balance | currency:'INR'}}</label>
                                 </td>
                             </tr>
                             <tr>
@@ -51,13 +53,11 @@
                             </tr>
                         </table>
                         <div fxLayout=row style="justify-content: space-between;">
-                                <button mat-stroked-button
-                                    color="accent" (click)="showTransactions(row, true)">Add
-                                    Payment
-                                </button>
-                                <button mat-stroked-button color="primary"
-                                    (click)="showTransactions(row, false)">History
-                                </button>
+                            <button mat-stroked-button color="accent" (click)="showTransactions(row, true)">Add
+                                Payment
+                            </button>
+                            <button mat-stroked-button color="primary" (click)="showTransactions(row, false)">History
+                            </button>
                         </div>
                     </div>
                 </div>

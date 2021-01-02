@@ -15,7 +15,7 @@ import { ViewReturnsDialogComponent } from '../view-returns-dialog/view-returns-
 @Component({
   selector: 'app-view-borrower',
   templateUrl: './view-borrower.component.html',
-  styleUrls: ['./view-borrower.component.css'],
+  styleUrls: ['./view-borrower.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),

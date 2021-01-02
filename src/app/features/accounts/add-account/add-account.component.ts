@@ -9,7 +9,7 @@ import { AccountService } from 'src/app/services/account.service';
 @Component({
   selector: 'app-add-account',
   templateUrl: './add-account.component.html',
-  styleUrls: ['./add-account.component.css']
+  styleUrls: ['./add-account.component.scss']
 })
 export class AddAccountComponent implements OnInit {
   form: FormGroup;

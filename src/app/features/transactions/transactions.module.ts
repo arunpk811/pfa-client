@@ -24,6 +24,5 @@ const transactionRoutes: Routes=[
     RouterModule,
     CommonModule
   ]
-  // entryComponents: [AddTodoDialogComponent]
 })
 export class TransactionsModule { }

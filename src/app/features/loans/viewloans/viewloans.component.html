@@ -1,6 +1,8 @@
 <div fxLayout='column'>
-    <label fxFlexAlign='center' class="title">Loans</label>
-    <button mat-raised-button color='primary' (click)='addLoan()' fxLayout="column" fxFlexAlign='end'>ADD</button>
+    <div fxLayout=row style="justify-content: space-between;">
+        <mat-label class="title">Loans</mat-label>
+        <button mat-raised-button color='primary' (click)='addLoan()' fxLayout="column" fxFlexAlign='end'>ADD</button>
+    </div>
     <span *ngIf='deleteMessage'>{{deleteMessage}}</span>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="margin-top: 10px;">
         <ng-container matColumnDef="name">
@@ -10,18 +12,18 @@
         </ng-container>
         <ng-container matColumnDef="amount">
             <th mat-header-cell *matHeaderCellDef> Amount </th>
-            <td mat-cell *matCellDef="let element"> {{element.amount|currency:'₹'}} </td>
-            <td mat-footer-cell *matFooterCellDef ngClass='total'> {{getTotal() | currency:'₹'}}</td>
+            <td mat-cell *matCellDef="let element"> {{element.amount|currency:'INR'}} </td>
+            <td mat-footer-cell *matFooterCellDef ngClass='total'> {{getTotal() | currency:'INR'}}</td>
         </ng-container>
         <ng-container matColumnDef="update">
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let element">
                 <button mat-icon-button color='primary' (click)='editLoan(element)'>
-                <mat-icon>edit</mat-icon>
-            </button>
+                    <mat-icon>edit</mat-icon>
+                </button>
                 <button mat-icon-button color='warn' (click)='deleteLoan(element)'>
-                <mat-icon>delete</mat-icon>
-            </button>
+                    <mat-icon>delete</mat-icon>
+                </button>
             </td>
             <td mat-footer-cell *matFooterCellDef> </td>
         </ng-container>

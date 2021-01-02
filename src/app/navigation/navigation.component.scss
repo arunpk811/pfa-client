@@ -1,0 +1,50 @@
+@import '../../scss/variables';
+
+mat-icon {
+  padding: 0.3em 0em 0.3em 0em;
+}
+
+mat-list-item {
+  color: aqua;
+}
+
+.bgimg {
+  display: block;
+  // background: url('../../assets/img/vector/logo4.png') no-repeat center center ;
+  height: 80vh;
+  /* border-radius: 25px; */
+}
+
+.tool-bar {
+  width: 60%;
+}
+
+.main {
+  padding-top: 5px;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-bottom: 100%;
+  /* background: url('../../assets/img/vector/office-env2.jpg') no-repeat center center fixed; */
+  background-color: $backgroundBlue
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="main"] {
+    width: 98%;
+    padding-top: 2%;
+    padding-right: 1%;
+    padding-left: 1%;
+    padding-bottom: 100%;
+  }
+  [class*="tool-bar"] {
+    width: 100%;
+  }
+}
+
+.is-active {
+  font-size: large;
+  color: blueviolet !important;
+  margin-left: 10px !important;
+  transition: 0.3s !important;
+}

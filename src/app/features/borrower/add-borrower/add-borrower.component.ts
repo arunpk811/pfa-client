@@ -8,7 +8,7 @@ import { Borrower } from 'src/app/models/borrower';
 @Component({
   selector: 'app-add-borrower',
   templateUrl: './add-borrower.component.html',
-  styleUrls: ['./add-borrower.component.css']
+  styleUrls: ['./add-borrower.component.scss']
 })
 export class AddBorrowerComponent implements OnInit {
   form: FormGroup;

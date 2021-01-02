@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-view-transactions',
   templateUrl: './view-transactions.component.html',
-  styleUrls: ['./view-transactions.component.css'],
+  styleUrls: ['./view-transactions.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
